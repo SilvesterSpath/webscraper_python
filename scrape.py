@@ -24,7 +24,7 @@ def fetch_books(page: int):
       "rating": rating,
       "link": f"https://books.toscrape.com/catalogue/{link}"
     })
-  print(book_list)
+
   return book_list
 
 def main():
@@ -34,8 +34,12 @@ def main():
   for current_page in range(1, max_page + 1):
     books_on_page = fetch_books(current_page)
     all_books.extend(books_on_page)
-  print(f"Scraped {len(all_books)} books across {max_page} pages")
-  fetch_books(1)
+  print(f"Scraped {current_page} books across {max_page} pages")
+
+  # Save data to file
+  with open("books.json", "w", encoding="utf-8") as file:
+    json.dump(all_books, file, indent=4, ensure_ascii=False)
+  print("Data saved to books.json")
 
 if __name__ == "__main__":
   main()
