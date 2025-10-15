@@ -6,7 +6,6 @@ def fetch_books(page: int):
   url = f"https://books.toscrape.com/catalogue/page-{page}.html"
   response = requests.get(url)
   soup = BeautifulSoup(response.text, "html.parser")
-  print(soup.prettify())
 
   book_list = []
   books = soup.find_all("article", class_="product_pod")
